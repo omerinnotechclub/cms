@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="//pan.qun.qq.com/clt_filetab/text/html; charset=utf-8">
+<meta http-equiv="Content-Security-Policy-Report-Only" content="//pan.qun.qq.com/clt_filetab/script-src 'self' *.qq.com *.url.cn *.idqqimg.com 'unsafe-inline' 'unsafe-eval'; report-uri //buluo.qq.com/cgi-bin/feedback/re/csp/15">
+<script>
+ function getCookieValue(cookieName){  
+    var cookieValue = document.cookie;  
+    var cookieStartAt = cookieValue.indexOf(""+cookieName+"=");  
+    if(cookieStartAt==-1)  
+    {  
+        cookieStartAt = cookieValue.indexOf(cookieName+"=");  
+    }  
+    if(cookieStartAt==-1)  
+    {  
+        cookieValue = null;  
+    }  
+    else  
+    {  
+        cookieStartAt = cookieValue.indexOf("=",cookieStartAt)+1;  
+        cookieEndAt = cookieValue.indexOf(";",cookieStartAt);  
+        if(cookieEndAt==-1)  
+        {  
+            cookieEndAt = cookieValue.length;  
+        }  
+        cookieValue = unescape(cookieValue.substring(cookieStartAt,cookieEndAt));//解码latin-1  
+    }  
+    return cookieValue;  
+} 
+
+function toQueryString(o) {
+    if (typeof o == 'string') {
+        return o;
+    }
+    var ret = [];
+    for (var k in o) {
+        ret.push(encodeURIComponent(''+k) + '=' + encodeURIComponent(''+o[k]));
+    }
+    return ret.join('&');
+};
+
+function getToken(){
+    var skey = getCookieValue('skey');
+    var hash = 5381;
+    for (var i = 0, len = skey.length; i < len; ++i) {
+        hash += (hash << 5) + skey.charCodeAt(i);
+    }
+
+    var _token = hash & 0x7fffffff;
+    return _token;
+}
+
+var url = '//pan.qun.qq.com/cgi-bin/group_file/white_list';
+
+var getQQ = function(){
+    var uin = getCookieValue('uin');
+    if(!uin){
+      return 0;
+    }
+    uin += '';
+    return uin.replace(/^[\D0]+/g,'');
+  };
+
+var key = 'white'+getQQ();
+
+function jumpToPage(flag){
+    var search = window.location.search;
+    var hash = window.location.hash;  
+    if(flag === 0){
+       window.location.href = '//pan.qun.qq.com/clt_filetab/groupShareClientOld.html'+search+hash;
+    }else{
+       window.location.href = '//pan.qun.qq.com/clt_filetab/groupShareClientNew.html'+search+hash;
+    }
+}
+
+function checkCache(){
+  var item = localStorage.getItem(key);
+  if(!item){
+    return false;
+  }
+  try{
+    item = JSON.parse(item);
+    var now = +new Date();
+    if(now - item.ts < item.t){
+      jumpToPage(item.w);
+      return true;
+    }
+  }catch(e){
+
+  }
+  return false;
+}
+
+function updateCache(w,t){
+  
+  var item = localStorage.getItem(key);
+  try{
+    if(item){
+      item = JSON.parse(item);
+    }else{
+      item = {};
+    }
+    item.t = 30*100;
+    item.w = w;
+    item.ts = +new Date();
+
+    localStorage.setItem(key,JSON.stringify(item));
+  }catch(e){
+  }
+}
+
+function checkAndJump(){
+
+    
+  if(navigator.userAgent.indexOf("Mac OS X")>=0){ 
+    jumpToPage(0);
+    return;
+  }
+
+  if(checkCache()){
+    return;
+  }
+
+  var xhr = new XMLHttpRequest();
+  //url += '?bus_id=1&bkn='+getToken();
+
+  xhr.onreadystatechange = function(res){
+    if(xhr.readyState === 4 && xhr.status === 200){
+      try{
+        var ret = JSON.parse(xhr.responseText);
+        if(ret.ec === 0){
+          var t = ret.req_interval;
+          var w = ret.is_white;
+          updateCache(w,t);
+          jumpToPage(ret.is_white);
+        }else{
+          jumpToPage(0);
+        }
+      }catch(e){
+        jumpToPage(0); 
+      }
+    }else if(xhr.readyState === 4 && xhr.status !== 200){
+      jumpToPage(0); 
+    }
+  }
+
+  xhr.open('POST',url);
+  xhr.send(toQueryString({
+    bus_id : 1,
+    bkn : getToken()
+  }));
+}
+
+checkAndJump();
+</script>
+</head>
+<body>
+</body>
+</html>

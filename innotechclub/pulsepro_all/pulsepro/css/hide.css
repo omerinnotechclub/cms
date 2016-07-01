@@ -1,0 +1,92 @@
+
+/* This CSS file lets you hide certain elements of Pulse */
+/* Just uncomment display:none; on the element you want hidden */
+
+
+/* ------------- Nav Items ------------- */
+
+.nav-pages {
+	/* display:none; */
+}
+
+.nav-blocks {
+	/* display:none; */
+}
+
+.nav-blog {
+	/* display:none; */
+}
+
+.nav-gallery {
+	/* display:none; */
+}
+
+.nav-stats {
+	/* display:none; */
+}
+
+.nav-form {
+	/* display:none; */
+}
+
+.nav-backup {
+	/* display:none; */
+}
+
+.nav-settings {
+	/* display:none; */
+}
+
+
+/* ------------- EMBED CODES ------------- */
+
+.howto {
+	/* display:none; */
+}
+
+
+/* ------------- BLOCKS ------------- */
+
+#sub-head .block-delete {
+	/* display:none; */
+}
+
+#sub-head .block-rename {
+	/* display:none; */
+}
+
+.moveto {
+	/* display:none; */
+}
+
+#sub-head .delete-folder {
+	/* display:none; */
+}
+
+
+/* ------------- BLOG ------------- */
+
+#sub-head a.delete-post {
+	/* display:none; */
+}
+
+
+/* ------------- GALLERY ------------- */
+
+#sub-head a.delete-gallery {
+	/* display:none; */
+}
+
+
+/* ------------- FORM ------------- */
+
+.form-options {
+	/* display:none; */
+}
+
+
+/* ------------- BACKUP ------------- */
+
+a.del-backup {
+	/* display:none; */
+}

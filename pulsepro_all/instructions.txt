@@ -1,0 +1,51 @@
+********** INSTRUCTIONS **********
+
+There are two methods in which Pulse Pro can be used. You can use it with an existing website and only use Pulse Pro for the backend OR you can use the built in template engine. Each usage case has slightly different instructions so choose the proper one below for your setup.
+
+
+
+********** Using Pulse with an existing site **********
+
+Installation:
+1. Unzip and upload the pulsepro folder, config.php and .htaccess to the root of your domain. The .htaccess file may be hidden on your local machine and therefore may not upload. In this case upload the "sample.htaccess" and then rename it to just .htaccess on your server. 
+2. Edit the .htaccess file to configure using the instructions at the top of the file.
+3. Go to yourdomain.com/pulsepro. (Default password is 'demo')
+4. Edit your options in the settings tab.
+
+Usage:
+Copy the embed code at the bottom of a block, blog, gallery or form and paste it into any .php page in which you want that content to appear.
+
+
+
+********** Using the Pulse template engine **********
+
+Installation:
+1. Unzip and upload all the contents of pulsepro_all folder to the root of your domain. Now if you go to yourdomain.com, you will see the Pulse Pro front-end template up and running. The .htaccess file may be hidden on your local machine and therefore will not upload. In this case upload the sample.htaccess and then remove then rename it to just .htaccess on your server.
+2. Edit the .htaccess file to configure using the instructions at the top of the file.
+3. To use the backend, go to yourdomain.com/pulsepro. (Default password is 'demo')
+4. Edit your options in the settings tab.
+
+Usage:
+The front-end template is meant to be starting point which you can customize and add your own content to. 
+-To change the logo, replace template/img/logo.png with your own logo. 
+-To change the header color or other colors, edit template/css/master.css.
+-To add a new page, go to the "pages" section in admin and create a new page.  
+-To make this new page show up in the navigation, edit the "nav" block.
+
+
+
+********** Troubleshooting **********
+
+There are three main points that usually solve 90% of tech support issues.
+
+1. Be sure to set the "data" folder permissions to 755 recursively, meaning the folder itself as well as all files and folders within it. Most ftp clients allow you to set this in one pass.  Some servers may need 777 if 755 does not work.
+
+2. If you renamed the pulsepro folder name to something else, change it on the settings page. If the pulsepro folder is not in the root, but in a sub-folder, this must also be reflected.  For example, if you have yourdomain.com/test/pulsepro, then the folder name in settings must be written as test/pulsepro not just pulsepro.
+
+3. Some computers hide files that start with "." so the .htaccess file may not have been uploaded when you installed. In this case upload the sample.htaccess then rename to just .htaccess on your server. Next follow the instructions inside the file to further configure it.
+
+
+
+********** Support **********
+
+For support, please go to http://pulsecms.com/support

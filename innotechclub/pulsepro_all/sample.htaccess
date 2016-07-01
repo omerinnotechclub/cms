@@ -1,0 +1,32 @@
+RewriteEngine On
+
+# If you install pulse in a sub-folder, some hosts require 
+# RewriteBase to be set to that sub-folder name (below)
+
+# RewriteBase /subfolder/
+
+
+############################################################
+# RewriteRules for using Pulse with your own template
+############################################################ 
+
+# Uncomment the rules below if you are using your own template
+# If embedding to a page other than blog.php, edit that in the rules below
+
+# RewriteRule ^blog-page-([^-]*)$ blog.php?page=$1                            
+# RewriteRule ^blog-([^-]*)+? blog.php?d=$1 [L]
+
+
+#############################################################
+# RewriteRules for using the Pulse template engine
+#############################################################
+
+# If you want to place the blog on a url other than /blog, 
+# change the word "blog" in p=blog to the new url in both rules below
+
+RewriteRule ^blog-page-([^-]*)$ ?page=$1&p=blog [L]
+RewriteRule ^blog-([^-]*)+? ?d=$1&p=blog [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule ^(.*)$ index.php?p=$1 [L]

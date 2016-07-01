@@ -1,0 +1,163 @@
+.blog-wrap {
+    padding: 0;
+    margin: 0 auto;
+    color: #333;
+    max-width: 800px;
+}
+
+.entry {
+	border-bottom: 1px solid #d5d5d5;
+	padding-bottom: 30px;
+	margin-bottom: 50px;
+}
+
+.blog-title {
+	font-size: 36px;
+	margin: 0px;
+	width: 100%;
+}
+
+.blog-title a {
+	color: #333;
+	text-decoration: none;
+}
+
+.blog-date {
+	color: #aaa;
+	padding: 15px 0;
+	float: left;
+	margin-right: 20px;
+}
+
+.blog-content {
+	clear: both;
+	padding-top: 10px;
+	float: none;
+}
+
+.num_comments {
+	padding: 15px 0;
+	float: left;
+}
+
+.num_comments a {
+	text-decoration: none;
+}
+
+#comments {
+	font-weight: bold;
+	font-size: 22px;
+	border-top: 5px solid #e5e5e5;
+	border-bottom: 5px solid #e5e5e5;
+	padding: 8px 0;
+	margin: 45px 0;
+	float: none;
+	clear: both;
+}
+
+.comment-date {
+    color: #999;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 10px;
+    float: left;
+    font-size: 14px;
+}
+
+.comment-name {
+    width: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 20px;
+    float: left;
+    font-weight: bold;
+}
+
+.blog-comment {
+	padding-bottom: 25px;
+	margin-bottom: 25px;
+	clear: both;
+	border-bottom: 1px solid #ddd;
+}
+
+.comment-form {
+    width: 100%;
+    margin-top: 25px;
+    clear: both;
+    margin-bottom: 50px;
+}
+
+textarea {
+	font-family: Helvetica, Arial, sans-serif;
+	border: 1px solid #ccc;
+    line-height: normal;
+    color: #333;
+    height: 125px;
+    padding: 2px;
+    width:500px;
+    max-width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+	font-family: Helvetica, Arial, sans-serif;
+	border: 1px solid #ccc;
+    line-height: normal;
+    color: #333;
+    height: 30px;
+    padding: 2px;
+    width:500px;
+    max-width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.read-more {
+	background-color: #f0f0f0;
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+.comments-off {
+	background-color: #F4F2EB;
+	border: 1px solid #ddd;
+	padding: 5px 10px;
+	border-radius: 4px;
+	display: inline;
+}
+
+.blog-pagination {
+    width: 250px;
+    margin: 0px;
+    clear: both;
+    float: none;
+    padding-left: 0px;
+    padding-bottom: 30px;
+    padding-right: 0px;
+    padding-top: 10px;
+}
+
+.blog-pagination a {
+    text-decoration: none;
+    color: white;
+    background-color: #aaa;
+    font-size: 13px;
+    padding: 7px;
+    margin: 0px;
+    margin-right: 10px;
+}
+
+.comment-label {
+	color: #555;
+	display: block;
+	clear: both;
+	float: none;
+}
+
+#ph {
+	display: none;
+	visibility: hidden;
+}

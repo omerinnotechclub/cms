@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>群文件</title>
+<script>
+window.TRecord={m:{},push:function(a,n,o){var d=this.m,e=d[a]||(d[a]={arr:[],hash:{}},d[a]);e.arr.push(n),e.hash[n]="undefined"!=typeof o?o:+new Date}},TRecord.push("main","domStart"),document.domain="qq.com";
+</script>
+<link rel="stylesheet" type="text/css" href="//qplus5.idqqimg.com/qun/pan/clt_filetab/v2/css/index_aio1447901580132.css">
+</head>
+<body>
+<div class="app" id="app">
+  <div class="head">
+    <div class="top1" id="top1">
+      <div class="part1">
+        <div class="sort_part">
+          <i>排序</i><i class="cln">:</i><span data-action="link_menu" menu="sort" class="sort_part_inner"><i class="text" id="sort_text">上传时间</i><i class="icon"></i></span>
+          <div class="aria">
+            <a class="aria" href="javascript:void(0);" aria-label="按上传时间排序" data-action="sort" by="time" tabindex="1">上传时间</a>
+            <a class="aria" href="javascript:void(0);" aria-label="按文件类型排序" data-action="sort" by="type" tabindex="1">文件类型</a>
+            <a class="aria" href="javascript:void(0);" aria-label="按上传者排序" data-action="sort" by="uploader" tabindex="1">上传者</a>
+            <a class="aria" href="javascript:void(0);" aria-label="按下载次数排序" data-action="sort" by="download" tabindex="1">下载次数</a>
+            <a class="aria" href="javascript:void(0);" aria-label="按文件大小排序" data-action="sort" by="size" tabindex="1">文件大小</a>
+            <a class="aria" href="javascript:void(0);" aria-label="已用容量" id="ariaUsed" tabindex="1"></a>
+            <a class="aria" href="http://qgroup.qq.com/share/upgrade.html" tabindex="1" role="button" aria-label="扩大容量"  alt="扩大容量"  target="_blank"  data-action="hide_menu" name="enlarge">扩大容量</a>
+            <a class="aria" href="http://support.qq.com/write.shtml?fid=35&ADPUBNO=" tabindex="1" role="button" aria-label="反馈" alt="反馈" target="_blank"  data-action="hide_menu" name="feedback">反馈</a>
+            <a class="aria" href="javascript:void(0)" onclick="window.location.reload();" aria-label="刷新" data-action="refresh" name="refresh" tabindex="1">刷新</a>
+            <a class="aria" href="javascript:void(0)" aria-label="批量操作" data-action="start_batch" tabindex="1">批量操作</a> 
+            <a class="aria" href="javascript:void(0)" aria-label="开通极速下载" data-action="open_vip" tabindex="1">开通极速下载</a> 
+            <a class="aria" href="javascript:void(0)" aria-label="查看上传和下载任务" data-action="box_toggle" tabindex="1">查看上传和下载任务</a> 
+          </div>
+        </div>
+        <div class="gap"></div>
+        <div class="more_part"  id="file_num" data-action="link_menu" menu="more"></div>
+        <div class="no_vip" id="is_qqvip" data-action="open_vip"><i></i><span>开通极速下载</span></div>
+      </div>
+      <div class="box_part" menu="box" data-action="box_toggle" title="查看上传和下载任务">
+        <div class="box_bg"></div>
+        <div class="box_num" id="box_num"></div>
+      </div>
+      <div class="upload_part"> <a href="javascript:void(0);" class="upload_btn" tabindex="1" role="button" data-action="file_upload"  aria-label="上传" title="上传文件" ></a> </div>
+    </div>
+    <div class="top2" id="top2">
+      <div class="batch_selectAll">
+        <input type="checkbox" class="cbox" id="selectAll" data-action="select_all" aria-label="选择所有文件" tabindex="1">
+      </div>
+      <div class="batch_label">全选</div>
+      <!--共多少个文件-->
+      <!--已选择多少个文件-->
+      <div class="batch_total" id="batch_total"></div>
+      <div class="batch_gap"></div>
+      <!--剩余空间 自适应-->
+      <div class="btn icon_btn batch_delete btn1"
+           id="btn_batch_delete"
+           data-action="batch_delete"
+           title="批量删除文件"
+          >
+          删除
+      </div>
+      <!--批量删除-->
+      <div class="btn icon_btn batch_download btn2"
+           id="btn_batch_download"
+           data-action="batch_download"
+           title="批量下载文件"
+          >
+          下载
+      </div>
+      <!--批量下载-->
+      <div class="btn batch_return btn3"
+           id="btn_batch_return"
+           data-action="batch_close"
+           title="退出批量操作模式"
+          >
+          返回
+      </div>
+      <div class="aria">
+        <span class="aria" id="batch_total_aria" tabindex="1"></span>
+        <a class="aria" href="javascript:void(0)" aria-label="批量删除文件" data-action="batch_delete" tabindex="1">删除</a>
+        <a class="aria" href="javascript:void(0)" aria-label="批量下载文件" data-action="batch_download" tabindex="1">下载</a>
+        <a class="aria" href="javascript:void(0)" aria-label="退出批量操作模式" data-action="batch_close" tabindex="1">返回</a>
+      </div>      
+      <!--退出模式--> 
+    </div>
+  </div>
+  <div class="main" id="main">
+    <div class="file_list scroll scroll_1" id="file_list"></div>
+    <div id="group_top"></div>
+  </div>
+  <ul class="menu file_menu" id="file_menu">
+    <li class="item preview" data-action="file_preview" aria-label="预览">预览</li>
+    <li class="item save_as" id="file_save_as" data-action="file_save" aria-label="另存为">另存为</li>
+    <li class="item" id="file_foward" data-action="file_foward" aria-label="转发">转发</li>
+    <li class="item" id="file_fowardTo" data-action="file_fowardToData" aria-label="转发到手机">转发到手机</li>
+    <li class="item save_as" id="file_open_folder" data-action="open_folder4" aria-label="在文件夹中显示">在文件夹中显示</li>
+    <!--<li class="item downloadfast" data-action="file_downloadfast" aria-label="用下载助手下载">用下载助手下载</li>-->
+    <li class="gap"></li>
+    <li class="item rename" data-action="file_rename" aria-label="重命名">重命名</li>
+    <li class="item forever" data-action="file_permanent" aria-label="转存为永久文件">转存为永久文件</li>
+    <li class="item jubao" data-action="file_jubao" aria-label="举报">举报</li>
+    <li class="gap"></li>
+    <li class="item delete" data-action="file_delete" aria-label="删除">删除</li>
+  </ul>
+  <div class="menu box" id="box">
+    <div class="box_title tri empty" id="box_title"><span data-action="clear_history">清除历史操作</span></div>
+    <div class="box_list scroll scroll_2" id="box_list" maxLimit="200"></div>
+  </div>
+  <div class="menu sort" id="sort">
+    <div class="item selected"  data-action="sort" by="time">上传时间</div>
+    <div class="item" data-action="sort" by="type">文件类型</div>
+    <div class="item" data-action="sort" by="uploader">上传者</div>
+    <div class="item" data-action="sort" by="download">下载次数</div>
+    <div class="item" data-action="sort" by="size">文件大小</div>
+  </div>
+  <div class="panel_con  delete_panel" id="b_delete_panel">
+    <div class="panel">
+      <div class="panel_title">批量删除
+        <div class="close"  data-action="b_delete_close"></div>
+      </div>
+      <div class="panel_content">
+        <div class="hint"></div>
+        <div class="process"></div>
+        <div class="result"></div>
+      </div>
+      <div class="btns">
+        <input type="submit" value="确定" class="btn_ok" id="b_delete_ok" data-action="b_delete_ok"/>
+        <input type="submit" value="取消" class="btn_no"  data-action="b_delete_cancel"/>
+        <input type="submit" value="关闭" class="btn_no btn_close"  data-action="b_delete_cancel"/>
+      </div>
+    </div>
+  </div>
+  <div class="panel_con  vip_panel" id="vip_msg_tips">
+    <div class="panel">
+      <div class="panel_title"><span id="vip_msg_tips_tit">极速下载特权</span>
+        <div class="close"  data-action="vip_tips_cancel"></div>
+      </div>
+      <div class="panel_content">
+
+      </div>
+      <div class="btns">
+        <div class="con-vip hide"><a href="#" data-action="con_vip">续费超级会员</a></div>
+        <a href="#" value="立即开通" class="btn_ok" id="vip_tips_ok" data-action="vip_tips_ok">立即开通</a>
+        <input type="submit" value="取消" class="btn_no" id="vip_tips_close"  data-action="vip_tips_cancel"/>
+      </div>
+    </div>
+  </div>  
+  <div class="panel_con rename_panel" id="rename_panel">
+    <div class="panel">
+      <div class="panel_title">重命名
+        <div class="close"  data-action="rename_close"></div>
+      </div>
+      <div class="rename_hint">请为该文件输入新名称:</div>
+      <div class="text">
+        <input type="text" value="" class="new_name" id="new_name"/>
+      </div>
+      <div class="err_text" id="rename_err_text"></div>
+      <div class="btns">
+        <input type="submit" value="确定" class="btn_ok" data-action="rename_ok"/>
+        <input type="submit" value="取消" class="btn_no"  data-action="rename_cancel"/>
+      </div>
+    </div>
+  </div>
+  <div class="panel_con jubao_panel" id="jubao_panel">
+    <iframe class="frame_jubao" id="jubao" frameborder="0" scrolling="no"></iframe>
+  </div>
+  <div class="menu more" id="more">
+    <div class="capacity" id="capacity" tabindex=1>
+      <div class="title">已用容量：</div>
+      <div class="size_bar" id="capacity_size_bar">
+        <div class="used" id="capacity_used"></div>
+      </div>
+      <div class="info" id="capacity_info"></div>
+    </div>
+    <div class="item enlarge"><a href="http://qgroup.qq.com/share/upgrade.html" tabindex="1" role="button"  alt="扩大容量"  target="_blank"  data-action="hide_menu" name="enlarge">扩大容量</a></div>
+    <div class="item feedback"><a href="http://support.qq.com/write.shtml?fid=35&ADPUBNO=" tabindex="1" role="button"  alt="反馈"  target="_blank"  data-action="hide_menu" name="feedback">反馈</a></div>
+    <div class="item group refresh"><a href="javascript:void(0)" onclick="window.location.reload();"  data-action="refresh" name="refresh">刷新</a></div>
+    <div class="gap"></div>
+    <div class="item batch_mode"><a href="javascript:void(0)" data-action="start_batch">批量操作</a></div>
+  </div>
+  <div class="security_panel" id="security_panel">
+    <div class="div1">文件有病毒，请谨慎下载</div>
+    <div class="div2"><span>电脑管家云鉴定</span><a id="security_appeal" href="" target="_blank">误报申诉</a></div>
+  </div>
+</div>
+<div class="tips-error" id="tipsError">
+  <div>
+    <i></i>
+    <p>由于该群被多次举报存在不良文件信息，已被冻结使用群文件的相关功能。更多信息，请点击<a href="http://kf.qq.com/faq/140829nqYFru140829BR3qEr.html" target="_blank">此处</a>查看和了解。</p>
+  </div>
+</div>
+<div class="alert-tips" id="alertTips">
+  <a href="http://kf.qq.com/faq/120511jiYzIJ140828eimiAR.html" target="_blank" data-action="click_tips">【网络正能量倡议书】腾讯呼吁网友共建绿色QQ群 抵制色情、反动等违法信息。</a>
+  <div class="close" data-action="close_tips"></div>
+</div>
+<div class="mask" id="mask"></div>
+<div class="loader open" id="loader">
+  <div class="loading"></div>
+  <div id="loader_text" class="loader_text"></div>
+</div>
+<!-- inline global scripts --> 
+<script>
+var TRecord=window.TRecord;TRecord.push("main","cssLoad"),TRecord.get=function(n,e){var r=this.m,t=r[n];return t&&e?t.hash[e]:t},TRecord.report=function(n,e,r,t){var i=100*Math.random()+1;if(("undefined"==typeof t||t>=i)&&(i=this.get(e))){for(var o,a,c=[],s=i.arr,d=1,h=s.length;h>d;d++)o=s[d],o in r&&c.push(r[o]+"="+(i.hash[o]-i.hash[s[0]]));if(c.length){a=c.join("&"),a="http://isdspeed.qq.com/cgi-bin/r.cgi?"+n+"&"+a;var p=new Image;p.src=a,p=null}}},TRecord.report1=function(n,e){e="http://isdspeed.qq.com/cgi-bin/r.cgi?"+n+"&"+e;var r=new Image;r.src=e,r=null},function(){function n(n){var e=window.location.hash.match(new RegExp("(#|&)"+n+"=([^&]*)(&|$)"));return e?decodeURIComponent(e[2]):""}var e=document.getElementById("app"),r=n("visitor");1==r?e.classList.add("visitor"):e.classList.add("notVisitor")}();
+</script> 
+<script>
+!function(e,r){"function"==typeof define&&define.amd?define([],r):e.IMBadjs=r()}(this,function(){var e=function(){var e;return function(){if(!e&&(e=((window.Simple||{}).browser||{}).info,!e)){e={type:""};var r=navigator.userAgent.toLowerCase();/webkit/.test(r)?e={type:"webkit",version:/webkit[\/ ]([\w.]+)/}:/opera/.test(r)?e={type:"opera",version:/version/.test(r)?/version[\/ ]([\w.]+)/:/opera[\/ ]([\w.]+)/}:/msie/.test(r)?e={type:"msie",version:/msie ([\w.]+)/}:/mozilla/.test(r)&&!/compatible/.test(r)&&(e={type:"ff",version:/rv:([\w.]+)/}),e.version=(e.version&&e.version.exec(r)||[0,"0"])[1]}return e}}(),r=this||window,i=function(r,t,o,n,s){var a=i._mid||195375,c=i._bid||102;if(n>0||0===n?a=n:-1===n&&(r="Script Error:"+r),i.binfo||(i.binfo=e()),s=s||4,!i._closed){var f=new Image;f.src="http://badjs.qq.com/cgi-bin/js_report?level="+s+"&bid="+c+(a?"&mid="+a:"")+"&msg="+r+"|_|"+encodeURIComponent(t)+"|_|"+o+(i.binfo?"|_|browser:[type:"+i.binfo.type+",ver:"+i.binfo.version+"]":"")+"&r="+Math.random(),f=null}};i.init=function(e,r,t,o){i._mid=r,i._bid=e,i._smid=t,i._closed=o},i.check=function(e,t){for(var o in e)r[o]||i("File Load Error:"+o,e[o],0,t,8)},i.report=function(e,r,t,o,n){n||window[o]?e>0&&i("Log Info:File Load Retry Success:"+o+" retry is"+e,t,0,241994,1):e==r&&i("File Load Error:"+o+" retry is"+e,t,0,196584,8)},i.title=function(e,r){var i="";switch(e){case"file":return r?"File Load Error":"File Load Success";case"cgi":switch(r){case 0:i="CGI Load Success";break;case 1:i="CGI NoLogin Error";break;case 4:i="CGI BaseKey Error"}return i+"!Ec:"+(r||"");case"http":switch(r){case-1:i="Http Empty Error";break;case 200:i="HTTP Load Success";break;case 404:i="HTTP Page Does Not Exist";break;case 500:i="HTTP Server Error";break;default:i="Http Info"}return i+"!Status:"+(r||"")}};var t=[];return r.onerror=function(){t.splice.apply(arguments,[3,0,-1,null]),i.apply(this,arguments)},i});
+</script> 
+<script>
+window.IMReport=function(){function r(r,e){if(Array.prototype.indexOf)return Array.prototype.indexOf.call(r,e);for(var n=0,t=r.length;t>n;n++)if(r[n]===e)return n;return-1}var e,n,t,o=function(){return 0},f=function(r){e=r.bId,n="http://jsreport.qq.com/cgi-bin/report"+(r.ctype?r.ctype:"")+"?id="+e+"&rs=",_debug=r.debug,r.aId&&(o=r.aId)},i=[],a=[],u=function(){var r=n+i.join("|_|")+"&r="+Math.random();if(_debug)console.info("[IMReport:debug]url="+r);else{var e=new Image;e.src=r,e=null}i=[]},c=["aId","v","mId","flag1","flag2","flag3","ver","rev"],v=function(e,n,f){var v,d={},p=typeof e;if("number"==p)p=typeof n,"undefined"==p||"string"==p?(d.v=1,f=n,v=o(e)+"-1-"+e):"number"==p&&(d.v=n,v=o(e)+"-1-"+e);else if("object"==p){d=e,e=d.mId,f=n,"v"in d||(d.v=1),"aId"in d&&"%AID%"!==d.aId||(d.aId=o(e));var l=[];for(var g in d){var I=r(c,g);-1!=I&&(l[I]=d[g])}v=l.join("-").replace(/-(?=-)/g,"-0")}if("once"==f){if(-1!=r(a,e))return;a.push(e)}v&&i.push(v),clearTimeout(t),"now"==f||"now"==e?u():t=setTimeout(u,500)};return v.ReportFactory=function(){var r={aId:1,v:1,mId:1,flag1:1,flag2:1,flag3:1,ver:1,rev:1},e=function(e,n){if(e){var t={};if("function"==typeof n&&(t=n(e)),"number"==typeof e)t.mId=e;else if("object"==typeof e)for(var o in e)o in r&&(t[o]=e[o]);v(t)}},n=function(r){r=r||{};var n=r.config||{},t=r.getDefaultOptFn;return function(r,o){var f="number"==typeof r?r:n[r];if(f){if("object"==typeof o)for(var i in o)f[i]=o[i];e(f,t)}}};return n}(),v.config=f,v}();
+</script> 
+<script>
+window.g_cfg_proj=function(){var _={version:"3.0.0",reportCfg:{global:{debug:0,bId:192,aId:function(){return"0"}},map:{TAB_FIRST_ENTER:{aId:1001,mId:355491},PROJ_VERSION:377970,PROJ_VERSION_LOCAL:377971,REFRESH_BTN_CLICK:{aId:1002,mId:366534},MORE_BTN_SHOWCLICK:{aId:1003,mId:366535},UPGRADE_LINK_CLICK:{aId:1004,mId:366536},UPLOADER_LINK_CLICK:{aId:1005,mId:366537},PAGECTRL_BTN_CLICK:{aId:1006},UPLOAD_BTN_CLICK:{aId:1007,mId:366538},UPLOADDROPDOWN_BTN_CLICK:{aId:1008},UPLOADFOREVER_LINK_CLICK:{aId:1009},UPLOADTEMP_LINK_CLICK:{aId:1010},UPLOAD_SUCC:{aId:1011,mId:366539},DOWNLOAD_BTN_CLICK:{aId:1012,mId:366540},"DOWNLOAD_BTN_CLICK#SUCC":{aId:1013,mId:366541},DELETE_BTN_CLICK:{aId:1014,mId:366542},"DELETE_BTN_CLICK#SUCC":{aId:1015,mId:366543},PAUSE_BTN_CLICK:{aId:1016,mId:366544},RESUME_BTN_CLICK:{aId:1017,mId:366545},CANCEL_BTN_CLICK:{aId:1018,mId:366546},CONTINUEUPLOAD_BTN_CLICK:{aId:1019,mId:366547},SORT_ENTRY_SHOWCLICK:{aId:1020,mId:366548},SORT_TIME_CLICK:{aId:1021,mId:366549},SORT_TYPE_CLICK:{aId:1022,mId:366550},SORT_AUTHOR_CLICK:{aId:1023,mId:366551},SORT_DOWNLOADTIME_CLICK:{aId:1024,mId:366552},SORT_FILESIZE_CLICK:{aId:1025,mId:366553},LIST_GROUPHEAD_CLICK:{aId:1026,mId:366554},ITEM_MORE_BTN_SHOWCLICK:{aId:1027,mId:366555},TMP2PERMANENT_CLICK:{aId:1028,mId:366556},BOX_ENTRY_SHOWCLICK:{aId:1029,mId:366557},FEEDBACK_CLICK:{aId:"%AID%",mId:366558},ERR_CGI_NOT_LOGIN:365683,ERR_CGI_BASEKEY:365684,ERR_CGI_OTHER:365685,ERR_CGI_RELOGIN_FAILED:365686,ERR_CGI_REBASEKEY_REACH_MAX:365687,ERR_PAGE_404:365688,ERR_CGI_RELOGIN_REACH_MAX:365698,ERR_CGI_TIMEOUT:365708,ERR_CGI_PERMANENT:365699,ERR_TASK_ALL:365700,ERR_CGI_DELETE:365701,ERR_CGI_RENAME:365702,ERR_CGI_GETSHARELIST:365703,ERR_FTN_32221991:365704,ERR_FTN_12029:365705,ERR_TASK_RETRY:365706,ERR_TASK_RETRY_REACH_MAX:365707,ERR_CHECKAUDIT:440440,ERR_CHECKVIP:440441,ERR_CGI_TRIGGER_VCODE:365709,ERR_CLT_HUMMERAPI_NOT_EXIST:365714,preview_click_img:{aId:1030,mId:379313},preview_click_filename:{aId:1031,mId:379314},preview_click_menu:{aId:1032,mId:379315},timeout_filelist:379316,timeout_permanent:379317,timeout_thumbnail:379318,timeout_delete:379319,timeout_checkaudit:440589,timeout_checkvip:440590,close_audit:449528,click_tips:449699,open_folder_upload:{aId:1033,mId:379320},open_folder_download:{aId:1034,mId:379321},open_folder_from_list:{aId:1035,mId:379322},menu_file_rename:{aId:1036,mId:379323},btn_rename_ok:{aId:1037,mId:379324},cgi_400_600_retry:379325,cgi_400_600_retry_succ:379326,img_thumb_load:379327,img_thumb_load_succ:379328,cgi_filelist_4xx:379329,cgi_filelist_5xx:379330,new_vip_click:366565,old_vip_click:366566,SAVEAS_BTN_CLICK:{aId:1038,mId:366559},downloadfast_btn_click:{aId:1040,mId:379332},jubao_btn_click:{aId:1039,mId:379333},b_checkbox_click:{aId:1041,mId:366560},b_checkAll_click:{aId:1042,mId:366561},b_delete_click:{aId:1043,mId:366562},b_download_click:{aId:1044,mId:366563},b_return_click:{aId:1045,mId:366564},__LAST__:{}}},badjsCfg:{close:0,bid:189,mid:355326,log_mid:{error:365681,fail:365682}}};return _}();
+</script> 
+<script>
+window.g_log=function(){var o=window.IMBadjs;window.g_cfg_proj;var r=g_cfg_proj.badjsCfg,e=g_cfg_proj.reportCfg.map||{},i={debug:1,info:2,error:4,fail:8},g=1;o.init(r.bid,r.mid,0,r.close);var f=function(f){var n,t,d,m,p;if("string"==typeof f)n=1,d="debug",m=r.log_mid[d],t=f,p="";else if("object"==typeof f){if(d=f.type||"debug",n=i[d]||1,m=f.mid,!m){var s=f.report;if("string"==typeof s){var u=e[s];"object"==typeof u&&"number"==typeof u.mId?m=u.mId:"number"==typeof u&&(m=u)}}m||(m=r.log_mid[d]),t=[],f.msg&&t.push("[msg]"+f.msg),t=t.join(","),p=f.url||""}t="LOG("+d+")["+t+"]",g?o(t,p,0,m,n):console.info("[LOG@console]["+d+"]msg="+t+",url="+p+",mid="+m)};return f}();
+</script> 
+<script>
+"use strict";!function(n,e){return"object"==typeof module&&"object"==typeof module.exports?(module.exports=e(n,{}),void 0):("function"==typeof define&&(define.amd||define.cmd)?define([],function(t,i){return e(n,i)}):n.reportCgi=e(n,{}),void 0)}(this,function(n,e){var t={},i=e||{};t.keyList=["domain","cgi","type","code","time","rate","uin","apn","device","signalStrength","expansion1","expansion2","expansion3","data","platform"],t.apn=null,t.device="",t.signalStrength="";var o=window.mqq;return i.report=function(n){if(!n||!n.url)return console.log("cgi retrun code report param error "),void 0;if(n.rate=n.rate||1,/^(([^:\/?#]+):)?(\/\/([^\/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$/.test(decodeURIComponent(n.url))){if(Math.random()<1/n.rate){var e=RegExp.$4||"",i=RegExp.$5||"";RegExp.$6||"",o&&o.device&&o.device.getNetworkType&&o.support("mqq.device.getNetworkType")&&!t.apn?o.device.getNetworkType(function(o){t.apn=o||"unknown",t.send.call(this,{domain:e,cgi:i||"",type:n.type||0,code:n.code||0,time:n.time||0,apn:t.apn||"",device:t.device||"",signalStrength:t.signalStrength||"",expansion1:n.expansion1||"",expansion2:n.expansion2||"",expansion3:n.expansion3||"",data:n.data||"",platform:n.platform||"",rate:n.rate,uin:n.uin||0})}):t.send.call(this,{domain:e,cgi:i||"",type:n.type||0,code:n.code||0,time:n.time||0,apn:t.apn||"",device:t.device||"",signalStrength:t.signalStrength||"",expansion1:n.expansion1||"",expansion2:n.expansion2||"",expansion3:n.expansion3||"",data:n.data||"",platform:n.platform||"",rate:n.rate,uin:n.uin||0})}return!0}return!1},t.cache={},t.send=function(n){var e=t.cache,i=2e3;if(e.mapping||(e.mapping={}),n){var r=JSON.stringify({domain:n.domain,uin:n.uin,rate:n.rate});return e.mapping[r]||(e.mapping[r]=[]),e.mapping[r].push(n),e.timer&&clearTimeout(e.timer),e.timer=setTimeout(function(){t.send.call(this)},i),!1}for(var r in e.mapping)if(e.mapping.hasOwnProperty(r))if(e.mapping[r]&&e.mapping[r].length>0){for(var n,a={key:t.keyList.join(",")},p=e.mapping[r].splice(0,10),u=0,c=p.length;n=p[u],c>u;u++)for(var d,s=0,f=t.keyList.length;d=t.keyList[s],f>s;s++)a[[u+1,s+1].join("_")]=n[d];var g=[];for(var u in a)g.push(u+"="+encodeURIComponent(a[u]));var m=g.join("&");if(o&&o.data&&o.data.pbReport&&o.support&&o.support("mqq.data.pbReport")){var l=window.navigator.userAgent,h=window.location.host,v={d:m,h:h,ua:l};o.data.pbReport("104",JSON.stringify(v))}else t.httpSend(m)}else delete e.mapping[r];return!0},t.httpSend=function(n){window._cgiReportStack||(window._cgiReportStack=[]);var e=new Image;window._cgiReportStack.push(e),e.src="http://c.isdspeed.qq.com/code.cgi?"+n},i}),window.mm_report=function(){window.MMReport;var n="@RELEASE_VERSION",e="http://wspeed.qq.com/w.cgi?",t=new Image,i={appid:1000138,releaseversion:n,frequency:1},o=function(){function n(n){var e=document.cookie.match(new RegExp("(^| )"+n+"=([^;]*)(;|$)"));return e?decodeURIComponent(e[2]):""}function e(){var e=n("uin");return e?parseInt(e.substring(1,e.length),10):null}return{get:n,uin:e}}(),r=function(n){return n+"&t="+(new Date).getTime()},a=function(n,a,p){var u,c=[];if(i.touin||(i.touin=o.uin()),i.commandid=n,i.resultcode=a,i.tmcost=p,0==a){i.frequency=20;var d=Math.floor(100*Math.random()+1);if(d>5)return}else i.frequency=1;for(var s in i)i.hasOwnProperty(s)&&c.push(s+"="+encodeURIComponent(i[s]));u=e+c.join("&"),u=r(u),setTimeout(function(){t.src=u},500)};return a}(),window.tdw_report=function(){var n="http://cgi.connect.qq.com/report/tdw/report?",e="dc00141",t=function(n){return"[object Array]"===toString.apply(n)},i=function(){function n(n){var e=document.cookie.match(new RegExp("(^| )"+n+"=([^;]*)(;|$)"));return e?decodeURIComponent(e[2]):""}function e(){var e=n("uin");return e?parseInt(e.substring(1,e.length),10):null}return{get:n,uin:e}}(),o=function(o,r){if(!t(r))throw Error('The param "data" required and must be an array.');t(r[0])||(r=[r]);var a=ctx.info,p=a.groupid,u=i.uin();p&&!~o.indexOf("obj1")&&(console.debug(r),o.unshift("obj1"),r.forEach(function(n){n.unshift(p)})),~o.indexOf("module")||(o.unshift("module"),r.forEach(function(n){n.unshift("pc_priv")})),~o.indexOf("opername")||(o.unshift("opername"),r.forEach(function(n){n.unshift("Grp_files")})),~o.indexOf("ts")||(o.unshift("ts"),r.forEach(function(n){n.unshift(Date.now())})),u&&!~o.indexOf("uin")&&(o.unshift("uin"),r.forEach(function(n){n.unshift(u)}));var c=n+"table="+e+"&fields="+JSON.stringify(o)+"&datas="+encodeURIComponent(JSON.stringify(r))+"&t="+Date.now(),d=new Image;d.src=c,d=null};return o}(),window.g_report=function(){var n=window.IMReport,e=window.g_cfg_proj,t=function(){var n={};return n},i=e.reportCfg;n.config(i.global);var o=n.ReportFactory({config:i.map,getDefaultOptFn:t});return o}();
+</script> 
+<script>
+function g_hitch(){var e=arguments,n=e[0];if("function"!=typeof n)throw new Error("g_hitch 要求第一个参数是 函数");var i=function(n,i){for(var o=[],d=1,t=0;d<n.length+i.length;d++)void 0===n[d]?(t<i.length&&o.push(i[t]),t++):d<e.length?o.push(n[d]):t<i.length&&(o.push(i[t]),t++);return o};return function(){var o=arguments,d=i(e,o);return n.apply(null,d)}}function g_debug(e){if(g_enable_debug){var n=document.getElementById("debug");n||(n=document.createElement("div"),n.innerHTML="for debug!",n.id="debug",n.className="debug",document.body.appendChild(n)),window.client,n.innerHTML+=e}}function g_remove_ease(e){e.classList.add("remove_ease"),setTimeout(function(){var n=e.parentNode;n&&n.removeChild(e)},300)}window.g_version="3.1.0",window.g_enable_debug=!1,window.g_local=!1,window.g_flag_chrome_high=!1,window.g_flag_local_enable=!0,window.g_flag_cgi_enable=!0,window.g_flag_thumb_enable=!0,window.g_flag_upload_temp=!1,window.g_flag_chrome_high=/chrome\/([2|3]\d)/gi.test(window.navigator.userAgent),window.g_i_openfolder=window.external&&window.external.openFolder,window.g_i_ifFileExist=window.external&&window.external.isFileExist,window.g_client_version=window.external&&window.external.CallHummerApi&&window.external.CallHummerApi("IM.GetVersion"),window.g_i_download_default_path=g_client_version&&JSON.parse(g_client_version).version>5299,window.g_i_download_fast=window.external&&window.external.downloadByXF,window.g_i_eim=4===JSON.parse(g_client_version).version%6,g_debug("version:"+g_client_version+g_i_download_default_path);
+</script> 
+<script>
+    TRecord.push("main","thirdLib");/*测速点3 第三方库加载完成 开始加载主逻辑*/
+</script> 
+<script src="//qplus4.idqqimg.com/qun/pan/clt_filetab/v2/bower_components/requirejs/require.js"></script> 
+<script src="//qplus4.idqqimg.com/qun/pan/clt_filetab/v2/js/index_aio1447901580132.js"></script> 
+<script>
+void function(){setTimeout(function(){var b=document.cookie.match(/(^| )nohost_guid=([^;]*)(;|$)/);if(b?decodeURIComponent(b[2]):0){var b="/nohost_htdocs/js/SwitchHost.js?random="+Math.random(),c=function(a){try{eval(a)}catch(b){}window.SwitchHost&&window.SwitchHost.init&&window.SwitchHost.init()},a=window.ActiveXObject?new ActiveXObject("Microsoft.XMLHTTP"):new XMLHttpRequest;a.open("GET",b),a.onreadystatechange=function(){4==a.readyState&&((200<=a.status&&300>a.status||304===a.status||1223===a.status||0===a.status)&&c(a.responseText),a=null)},a.send(null)}},1500)}();
+</script>
+
+</body>
+</html>
